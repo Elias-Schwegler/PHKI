@@ -1,0 +1,224 @@
+﻿=== SYLLABUS: ASSESSMENT INFO ===
+
+--- Page 1 ---
+PHKI_F26_V1
+Philosophy, Art, and Artificial Intelligence (PHKI û FS26)
+Shaelom Fischer (MV), Guillaume Massol, Catherine Hayden
+Module Overview
+This module explores the connections between  philosophy, art, and artificial intelligence (AI) . Together weÆll explore some of the most pressing questions
+raised by this powerful technollogy. We will consider how philosophers approach the concepts of AI and creativity, asking what it means for something to be
+called ôartö when it is created by a machine. We will also examine how AI is shaping our world today and what its portrayal in film, TV, and othe rmedia
+reveals about societyÆs hopes and fears. Students will be encouraged to reflect critically on their own values and beliefs and how their understanding of AI is
+shaped by them.
+By the end of the course, students will have a deeper perspective on AIÆs creative potential, its societal impact, and its implications for culture.
+Use of AI in Course Materials
+Some of the course materials, including lecture slides, prompts, and examples, were created with the assistance of AI tools (e.g., ChatGPT, DALL-E, Gemini).
+All materials have been reviewed, edited, and approved by the lecturers. The purpose of this disclosure is to model the same transparency we expect from
+students: if you use AI tools in your assignments, you must clearly state which tools you used, how you used them, and what role they played in shaping your
+work.
+Competencies / Learning Outcomes
+Competencies to be attained:
+Learning Outcomes include:
+Professional Competencies
+ò   Students can explain Critical Theory and the Turing Test and how both relate to AI.
+ò   Students recognize the main features of the social and philosophical discourse on AI.
+ò   Students understand how AI challenges our understanding of human agency and authenticity.
+Methodological Competencies
+ò   Students are able to access philosophical texts or other artistic media on AI.
+ò   Students are able to open up artistic explorations of AI.
+ò   Students are able to reflect critically on the role of AI in human creativity.
+ò   Students are able to identify relevant information on a given or self-imposed topic.
+Generated using AI
+
+--- Page 3 ---
+PHKI_F26_V1
+Weekly Plan
+Week / Date
+Topic
+Lecturer
+W1: 17.02.2026
+Intro to Philosophy, Art and AI
+Philosophy and art in AI-driven societies
+What we value in art and if automation threatens it
+Module syllabus and assignments briefing
+AI Use in PHKI
+SF
+W2: 24.02.2026
+Human-AI Interaction & The Turing Test
+Explore Alan TuringÆs Imitation Game
+Anthropomorphism
+The Uncanny Valley
+SF
+W3: 03.03.2026
+History of ôMan vs. Machineö
+Early human stories and machines
+Societal fears and desires
+Patterns across history (time, location, etc.)
+CH
+W4: 10.03.2026
+Critical Theory
+Bias, ideology, and power embedded in data and algorithms
+Who benefits / is excluded / represented
+Case studies on algorithmic bias in society
+CH
+W5: 17.03.2026
+AI in Education
+Shifts in learning and assessment,
+The devaluation and evolution of human skills
+Authorship, originality, and academic integrity in AI era
+Educational spaces (historically) being sites of cultural and artistic
+production and expression
+CH
+W6: 24.03.2026
+Nature of Learning in Humans & AI
+Comparing biological neurons vs neural networks
+Human learning vs. machine prediction
+The ôblack boxö problem
+GM
+W7: 31.03.2026
+Digital Creativity
+AI Art Tools
+GM
+
+--- Page 4 ---
+PHKI_F26_V1
+Creative process, human agency with generative art
+W8: 14.04.2026
+Supported Project Work
+Connecting projects to course themes
+Hands-on support for Assignment 1
+Peer-to-peer feedback
+CH
+W9: 21.04.2026
+Assignment 1 Presentations + Wrap-up
+Digital Projects (Assignment 1) due on 25.04.26
+Small-group presentations
+GM + CH
+W10: 28.04.2026
+The Portrayal of AI in Media û Part 1
+Assignment 2 briefing
+Common AI tropes
+Societal fears and desires
+SF
+W11: 05.05.2026
+The Portrayal of AI in Media û Part 2
+Portrayals across different genres and time periods
+Public perceptions of AI
+SF
+W12: 12.05.2026
+Current Society
+Personalization; echo chambers
+Privacy erosion
+AI as cultural experiences
+CH
+W13: 19.05.2026
+Future Society
+Automation, work, environmental implications
+Social contracts/UBI, responsibility, long-term consequences
+CH
+W14: 26.05.2026
+Group Micro-vivas + Module wrap-up
+Micro-viva Prep Sheet due 22.05.26
+Group Videos (Assignment 2) due 20.06.2026
+Final oral discussions on Assignment 2
+Synthesis of philosophical, artistic, and societal insights
+Reflecting on how perspectives on AI have evolved
+SF
+
+--- Page 5 ---
+PHKI_F26_V1
+Assignments
+In the Philosophy, Art, and AI course, students will have the opportunity to engage in two assignments throughout the semester:
+1) Digital Projects:  Students will create a piece of digital art using an AI tool (e.g., AI image generator, text-to-speech, language model). This could be
+visual art, music, poetry, or mixed media. They will then write an analytical report analyzing their creation process, the role of AI in their art, and how
+their work reflects philosophical and cultural themes discussed in the course.
+2) Group Videos:  Students will examine how AI is portrayed in the media and different art forms and connect it to the various topics covered in the
+module. The primary objective is to analyze and discuss what these portrayals reveal about society's perceptions and viewpoints regarding AI. By
+critically exploring the artistic representations of AI, students will uncover valuable insights into the societal implications associated with this emerging
+technology. After group videos have been submitted and viewed by their lecturer, each group will participate in an oral discussion with their lecturer
+on the topic of their presentation.
+Assignments/Marks breakdown:
+1)   Digital Projects + Report: 40% -  due  25.04.26
+2)   Micro-vivas + Group Videos: 60%
+a.   Micro-viva Prep Sheet due 22.05.26
+b.   Group Videos (Assignment 2) due 20.06.2026
+We look forward to a successful and eye-opening semester with you all!
+
+
+
+=== PROJECTS PDF: ALL PAGES ===
+Total pages: 9
+
+--- Page 1 ---
+PHKI_F26_V1. Seite 1/5
+Philosophy, Art, and Artificial Intelligence (PHKI û FS26)
+Assignments Overview & Details
+AI Use in PHKI
+Good scientific research requires clearly outlining the process of text creation, as emphasised in our HSLU guidelines on scientific misconduct and plagiarism. (See
+æInformation and AdministrationÆ folder on ILIAS.) Therefore, you are expected to be transparent about your use of AI tools in both assignments. This information must be
+included in a ædisclaimerÆ section at the end of each assignment. Specify which tools you used, their purpose, and how you applied each one.
+Assignment 1: Digital Projects + Reports (40%)
+*  due on 25.04.26
+Task:  Students will create a piece of digital art using an AI tool (e.g., AI image generator, text-to-speech, language model). This could be visual art, music, poetry, or mixed
+media. They will then write an analytical report analyzing their creation process, the role of AI in their art, and how their work reflects cultural and philosophical themes
+discussed so far in the course.
+Please note that this assignment must be completed in English .
+Instructions:
+1.   Select AI Tool:  Choose an AI tool suitable for your chosen art form (e.g., image generator, text-to-speech, language model etc.).
+2.   Create Artwork : Use the selected AI tool to create a piece of digital art. This could be visual art, music, poetry, or mixed media.
+3.   Write Analytical Report : Reflect on your creation process, the influence of AI on your artwork, and how your work relates to cultural and philosophical themes
+discussed in the course. Your report should be detailed and insightful.
+4.   Present Artwork : During class, present your digital artwork to your peers. Be prepared to discuss your analytical report and answer questions about your creative
+process and the themes explored in your artwork.
+python : Traceback (most recent call last):
+At line:1 char:1
++ python -c "
++ ~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteExceptio 
+   n
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 33, in <module>
+    print(t)
+    ~~~~~^^^
+  File "C:\Users\elias\anaconda3\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\ufb00' in position 1: character maps to 
+<undefined>
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+
+--- Page 2 ---
+PHKI_F26_V1. Seite 2/5
+Suggestions:
+1.   Tools : Runway, Krea.ai, OPENAI GPT, DALL-E, Mid-Journey, Huggingface
+2.   Art Forms : Visual art (images, digital paintings), Music (generated compositions), Poetry (AI- generated poems), Mixed media (combination of AI-generated and
+human-created elements)
+3.   Themes:  Ethics of AI, Creativity and authorship, Human-machine collaboration, Technological determinism
+You will be assessed on:
+1.   Creativity : Originality and innovation of the digital artwork
+2.   Integration of AI : Effective utilization of the AI tool to enhance or create the artwork
+3.   Analytical Report : Depth of analysis in discussing the creation process, the role of AI, and the reflection of philosophical and cultural themes
+4.   Presentation : Clarity and coherence in presenting the artwork.
+Please see detailed rubrics below.
+
+--- Page 3 ---
+Seite 3/9
+Rubric for Digital Artwork:
+Criteria
+6.0
+5.0
+4.0
+3.0
+2.0
+1.0
+Crea.vity
+and
+innova.on
+of the digital
+artwork (as a
+whole)
+(45%)
+ExcepWonally high level
+of creaWve thinking or
+innovaWon. Excellent
