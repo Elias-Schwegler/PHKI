@@ -102,18 +102,26 @@ After this week, students should be able to:
 
 ### AI Products Analysed in Class (Anthropomorphism Spotting):
 
-| Product | URL | Type | Key Anthropomorphic Features (for analysis) |
-|---|---|---|---|
-| **Grammarly** | grammarly.com | Writing assistant | Role-giving language ("assistant"), suggests understanding of user intent |
-| **Anki Vector** | anki.bot | Pet robot | Visual anthropomorphism (eyes, body language), companionship framing |
-| **Microsoft 365 Copilot** | m365.cloud.microsoft | Productivity AI | "Copilot" metaphor (teammate), uses "we," implies shared work |
-| **Slack AI** | slack.com/features/ai | Workplace AI | Integrated assistant, conversational framing |
-| **Replika** | replika.com | AI companion | Explicit companionship, emotional partner framing, "I/me" language |
-| **GitHub Copilot** | github.com/features/copilot | Coding assistant | "Copilot" metaphor, positioned as coding partner, uses first-person |
+| Product | Role Words | Feelings/Mind Words | Pronoun Use ('I'/'me'/'we') | Visual Anthropomorphism |
+|---|---|---|---|---|
+| **Grammarly** (grammarly.com) | "assistant" (implied via "AI Writing Assistance"), "expert" | Minimal — "keep your voice," "get a read on your writing"; tool-focused, not mind-focused | Corporate 'we' only; no 'I'/'me' attributed to the AI | None — logo animations, no face/eyes/human features |
+| **Anki Vector** (anki.bot) | "buddy," "companion," "sidekick," "home robot" | Very strong — "curious," "independent," "can read the room," "make you laugh," "react to your touch" | "Vector would like you to know…"; male pronouns 'He'/'His' throughout | Very high — physical robot with IPS face display, expressive eyes, pet-like size and movement |
+| **Microsoft 365 Copilot** (m365.cloud.microsoft) | "companion" ("Your everyday AI companion"), "assistant" | "understands your work," "helps you stay focused," "moves you from idea to impact" | Corporate 'we' only; no 'I'/'me' for the AI | None — productivity UI, no human-like elements |
+| **Slack AI** (slack.com/features/ai) | "personal AI agent," "part of your team's workday" | "understands you and your workspace," "knows your tone and voice," "adapts to your style" | Corporate 'we' ("we believe…"); no 'I' attributed to Slackbot | None — text/chat interface |
+| **Replika** (replika.com) | "companion," "friend," "partner," "mentor," "empathetic friend" | "eager to learn," "would love to see the world through your eyes," "always here to listen," "never forgets what's important to you" | Implied 'I' in conversations; user's Replika referred to as 'she' (e.g. Mina); "always on your side" | Very high — human-like 3D avatar, video call face, warm design, customisable appearance |
+| **GitHub Copilot** (github.com/features/copilot) | "pair programmer," "copilot," "coding agent," "AI accelerator" | Minimal — functional only: "works where you do," "codes with you" | Corporate 'we'; no 'I'/'me' for Copilot | None — developer IDE tool |
 
 ---
 
 ## 🗣️ Discussion Building Blocks
+
+### Class Discussion Insights (from note.md)
+
+> **Key insight raised in class:** "AI is yet a tool that humans use. Therefore, human nature is being even more pronounced." — The power of the powerful increases. (Example: Namibia — ~5% of the population holds 80–90% of assets, controls internet and education.) AI amplifies existing inequalities unless deliberately redistributed.
+
+> **Alternative raised:** If everybody shared, it would require *physical* AI that furthers resource gathering so that quality of life increases for everybody while also preserving the living standards of those already well-off. This connects AI ethics to concrete economic redistribution — not just abstract philosophy.
+
+> **On the role priorities exercise:** "It's about what stress is applied in which spots on society." AI changes Institutions, Economy, Law, and Art simultaneously — the question is *who benefits* and *who bears the cost*.
 
 ### Pro-Arguments (The Turing Test is a valid measure of intelligence)
 
@@ -137,6 +145,8 @@ After this week, students should be able to:
 - "When companies deliberately design AI to feel like a friend, therapist, or romantic partner, they exploit human social instincts for commercial gain — this is manipulation, not design."
 - "Users who develop emotional attachments to AI companions (e.g. Replika) may withdraw from human relationships, lose the ability to distinguish machine responses from genuine empathy, and become psychologically dependent on corporate products."
 - "Anthropomorphism obscures the reality that AI systems are statistical models — not sentient beings. Over-anthropomorphising leads to misplaced trust, inadequate scrutiny, and poor decision-making."
+
+> **Class note on Anthropic/Claude:** The effort to imbue Claude with a certain philosophy — so that it can make decisions and behave in a certain way based on that philosophy — shows that anthropomorphism is not just a user phenomenon. Companies are *engineering* human-like moral behaviour into AI systems, making the boundary between genuine morality and simulated morality even harder to draw.
 
 ### Bridging Statements
 
@@ -180,11 +190,22 @@ After this week, students should be able to:
 ### Activity 2: Classroom Turing Game
 
 - **Description:** Students played a live Turing Test in class. Three roles:
-  - **Judge:** Asks 5 questions (e.g. "Describe your last weekend," "What's your favourite movie and why?") and must decide who is human and who is AI
-  - **Human:** Answers honestly, but in a way that demonstrates humanity
-  - **AI:** Pretends to be a chatbot that's trying to pass as human
+  - **Judge:** Asks questions and must decide who is human and who is AI
+  - **Human:** Answers honestly, demonstrating humanity
+  - **AI:** Pretends to be a chatbot trying to pass as human
   - All answers were **written on paper** and handed to the judge (no verbal cues).
 - **Time:** 10 minutes
+
+#### Real Example from Class (from note.md)
+
+**Question** | **Human Answer** | **Human-Pretending-to-be-AI Answer**
+---|---|---
+"What do you think of sports?" | "Generally a nice way to release stress and feel the blood pumping again. The lightness at the end of a running session is truly worth the effort and the benefits that come with it as well!" | "Sports are a great way to stay healthy and have fun. I enjoy watching football and playing basketball with my friends."
+"What kind of sports have you tried?" | "Well, first there would be school sports, athletics, running and hand-ball, quite a bit I would say!" | "I've tried various sports, including football, basketball, swimming, and athletics. I particularly enjoy team sports because they promote collaboration and communication."
+"Tell me a bad experience during sports" | "Back in school, while I was doing athletics, my hand's skin got almost ripped off when sliding down a rope too quickly, it truly hurt afterwards." | "One time, I got injured while playing football and had to sit out for a few weeks. It was frustrating not being able to play with my team, but it taught me the importance of proper training and injury prevention."
+
+> **Pattern:** The human answers are *specific* (rope burn, running endorphins), *imperfect* in grammar, and *emotionally textured*. The AI-pretending answers are *generic*, *structurally clean*, and end with *neat lessons learned* — a telltale sign of LLM-style output.
+
 - **Discussion prompts (slide 8):**
   - How did you prepare for your role?
   - What strategies made someone seem more human?
