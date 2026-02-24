@@ -247,6 +247,7 @@ After this week, students should be able to:
 | This Week's Content | How It Helps |
 |---|---|
 | **Turing Test & Chinese Room** | Frame your reflection report around the question: "Did my AI tool *understand* my creative vision, or merely *simulate* understanding?" This connects directly to the "Analysis of Role of AI" criterion (30%) |
+| **Artistic Turing Test (Project Idea)** | The project is about *why* the artwork is created, not just aiming for something aesthetically pleasing (e.g., nice-sounding music). A strong idea is to test if an audience can differentiate between a human-made version and your AI-generated version — effectively running an artistic Turing Test. |
 | **Anthropomorphism (degrees)** | Reflect on how you interacted with your AI tool — did you anthropomorphise it? Did you say "thank you"? Treat it as a collaborator? This self-awareness enriches the "Analysis of Creative Process" criterion (20%) |
 | **Uncanny Valley** | If creating visual art with human figures, the Uncanny Valley is a practical constraint — and a potential philosophical theme. Deliberately exploring the boundary between realistic and unsettling could be a strong creative choice |
 | **Amanda Askell case study** | Demonstrates that philosophy and AI are not separate domains — your analytical report can draw on this to argue that creative AI tools embed human values (and biases) by design |
