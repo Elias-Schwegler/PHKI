@@ -1,0 +1,6 @@
+# Ignore temporary extraction scripts and files
+_extract_temp.py
+_slides_extracted.txt
+
+# Ignore PDF to Image conversion folders
+*_images/

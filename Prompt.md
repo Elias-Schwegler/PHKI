@@ -298,8 +298,9 @@ PDFs **cannot** be read with `view_file`. Use **PyMuPDF** (`fitz`) — already i
 **Step-by-step:**
 1. Write a temporary Python extraction script (see below)
 2. Run it to produce `.txt` files
-3. Read the `.txt` files with `view_file`
-4. **Delete all temporary files** (`.txt` outputs and the script itself) when done
+3. If extracting images, save them to a subfolder named `_slides_images` (e.g. `Week 03_ 03.03/_slides_images/`). This ensures they are ignored by git via the `.gitignore` (`*_images/` rule).
+4. Read the `.txt` files with `view_file`
+5. **Delete all temporary files** (`.txt` outputs and the script itself) when done
 
 **Ready-to-use extraction script** — save as a temp file like `_extract_temp.py`, run, then delete:
 
