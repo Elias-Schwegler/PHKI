@@ -4,3 +4,7 @@ _slides_extracted.txt
 
 # Ignore PDF to Image conversion folders
 *_images/
+
+# Ignore large binary assets (slides, zips, exemplars)
+*.pdf
+*.zip
