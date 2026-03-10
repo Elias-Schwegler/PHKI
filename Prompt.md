@@ -361,8 +361,47 @@ print("Done. Read _slides_extracted.txt, then delete it and this script.")
 - The **table extraction** (`find_tables()`) is the most reliable for structured content — always check tables first
 - The **structured dict mode** preserves text block positions and is best for multi-column slides
 - The **raw text** mode is a fallback — useful to cross-check but often garbled for complex layouts
-- Some slides are **image-heavy** (AI art examples) — note what images appear based on surrounding text
 - The Syllabus and Projects PDFs have already been fully extracted and their content is documented in the sections above — **no need to re-extract them**
+
+### Image Extraction (Required — slides are image-heavy!)
+
+Slide decks regularly contain **AI-generated images, diagrams, and visual arguments** that carry philosophical content the text extraction cannot capture (e.g., word embedding vector diagrams, bias iceberg infographics, GPT-output comparison triptychs). **Always extract and analyse images** — they are often the most pedagogically rich part of the slide.
+
+> [!IMPORTANT]
+> Image extraction is **not optional**. Slides in this module use AI-generated images deliberately to make arguments. Reading text alone will miss key content.
+
+**Ready-to-use image extraction script** — run after text extraction, then analyse the saved images with `view_file`, then delete the folder:
+
+```python
+import fitz
+import os
+
+pdf_path = r"c:\Users\elias\Documents\HSLU_MODULE\Semester_2\PHKI\Course Documents\Week XX_ DD.MM\PHKI_WX - pre-class slides.pdf"
+out_dir  = r"c:\Users\elias\Documents\HSLU_MODULE\Semester_2\PHKI\Course Documents\Week XX_ DD.MM\_slides_images"
+os.makedirs(out_dir, exist_ok=True)
+
+doc = fitz.open(pdf_path)
+for page_num in range(len(doc)):
+    page = doc[page_num]
+    for img_idx, img_info in enumerate(page.get_images(full=True)):
+        xref = img_info[0]
+        base_image = doc.extract_image(xref)
+        img_bytes = base_image["image"]
+        # Skip tiny icon/bullet images (< 5 KB)
+        if len(img_bytes) > 5000:
+            fname = os.path.join(out_dir, f"page{page_num+1:02d}_img{img_idx+1:02d}.{base_image['ext']}")
+            with open(fname, "wb") as f:
+                f.write(img_bytes)
+            print(f"Saved: {fname}")
+doc.close()
+print("Done. View images with view_file, then delete _slides_images/ and this script.")
+```
+
+**After extraction:**
+- Use `view_file` on each meaningful image (skip repeated HSLU logos / slide backgrounds)
+- For each substantive image, note: what it shows, what prompt or context is given on the slide, and what philosophical argument it makes
+- Add a **🖼️ Key Slide Visuals — Image Analysis** section to the summary documenting this
+- The `_slides_images/` folder is gitignored (`*_images/` rule) — leave it in place for reference; it will not be committed
 
 ### Summary Creation
 - First locate the **Week folder** in `Course Documents/`
@@ -376,6 +415,42 @@ print("Done. Read _slides_extracted.txt, then delete it and this script.")
 - **Project utility:** Always highlight how content can be applied to Assignment 1 (art + reflection) or Assignment 2 (media analysis + video)
 - **Attribution:** Name thinkers, artists, and works precisely
 - **No code required** — this is a humanities/philosophy module
+
+---
+
+### Git & Version Control — ⚠️ Critical Rules
+
+> [!CAUTION]
+> **Never commit large binary files to git.** The `.gitignore` already excludes `*.pdf`, `*.zip`, and `*_images/`. If you accidentally stage them, the push will fail with `RPC failed; curl 65 Recv failure: Connection was reset`.
+
+**Files that must NEVER be committed:**
+- PDF slide decks (`*.pdf`)
+- ZIP files (`*.zip`) — e.g., assignment exemplar packages
+- Extracted image folders (`*_images/`)
+- Temporary extraction scripts and `.txt` outputs
+
+**Files that SHOULD be committed:**
+- `SUMMARY_WEEKXX.md` — the main output
+- `notes.md` — in-class notes
+- `.gitignore` — keep this up to date
+
+**If you accidentally commit a large file**, fix it before pushing:
+```
+git rm --cached "path/to/large-file.pdf"
+git commit --amend --no-edit
+git push origin main:main
+```
+
+**The `.gitignore` should always contain at minimum:**
+```
+_extract_temp.py
+_slides_extracted.txt
+*_images/
+*.pdf
+*.zip
+```
+
+---
 
 ### Recurring Module Themes (track across weeks)
 - **Human agency & authenticity** — What makes us human? What is authentic creativity?
