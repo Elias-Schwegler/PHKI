@@ -1,0 +1,572 @@
+"""
+Generate PHKI Assignment 1 Analytical Report as .docx
+Elias Schwegler - HSLU FS26
+"""
+
+from docx import Document
+from docx.shared import Pt, Cm, RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
+import os
+
+# ── Paths ──────────────────────────────────────────────
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_PATH = os.path.join(SCRIPT_DIR, "PHKI_Assignment1_Report.docx")
+
+# ── Colours ────────────────────────────────────────────
+NAVY = RGBColor(0x1F, 0x39, 0x64)
+DARK_GREY = RGBColor(0x40, 0x40, 0x40)
+BLACK = RGBColor(0x00, 0x00, 0x00)
+
+doc = Document()
+
+# ── Page Setup ─────────────────────────────────────────
+for section in doc.sections:
+    section.top_margin = Cm(2.54)
+    section.bottom_margin = Cm(2.54)
+    section.left_margin = Cm(2.54)
+    section.right_margin = Cm(2.54)
+
+# ── Styles ─────────────────────────────────────────────
+style_normal = doc.styles["Normal"]
+style_normal.font.name = "Calibri"
+style_normal.font.size = Pt(11)
+style_normal.font.color.rgb = BLACK
+style_normal.paragraph_format.space_after = Pt(6)
+style_normal.paragraph_format.line_spacing = 1.15
+
+for level, size in [(1, 16), (2, 13), (3, 11)]:
+    hs = doc.styles[f"Heading {level}"]
+    hs.font.name = "Calibri"
+    hs.font.size = Pt(size)
+    hs.font.color.rgb = NAVY
+    hs.font.bold = True
+    if level == 3:
+        hs.font.italic = True
+
+
+def add_para(text, bold=False, italic=False, align=None, size=None, color=None, space_after=None):
+    """Helper to add a styled paragraph."""
+    p = doc.add_paragraph()
+    run = p.add_run(text)
+    if bold:
+        run.bold = True
+    if italic:
+        run.italic = True
+    if size:
+        run.font.size = Pt(size)
+    if color:
+        run.font.color.rgb = color
+    if align:
+        p.alignment = align
+    if space_after is not None:
+        p.paragraph_format.space_after = Pt(space_after)
+    return p
+
+
+def add_mixed_para(parts, align=None):
+    """Add a paragraph with mixed formatting. parts = [(text, bold, italic), ...]"""
+    p = doc.add_paragraph()
+    for text, bold, italic in parts:
+        run = p.add_run(text)
+        run.bold = bold
+        run.italic = italic
+    if align:
+        p.alignment = align
+    return p
+
+
+# ══════════════════════════════════════════════════════════
+#  TITLE PAGE
+# ══════════════════════════════════════════════════════════
+
+for _ in range(6):
+    add_para("", space_after=0)
+
+add_para(
+    "Synthetic Pine & Heavy Air",
+    bold=True, size=26, color=NAVY,
+    align=WD_ALIGN_PARAGRAPH.CENTER, space_after=6
+)
+
+add_para(
+    "An Analytical Report on AI Music Generation with Google Gemini",
+    italic=True, size=14, color=DARK_GREY,
+    align=WD_ALIGN_PARAGRAPH.CENTER, space_after=24
+)
+
+for line in [
+    "Elias Schwegler",
+    "",
+    "Philosophy, Art, and Artificial Intelligence (PHKI FS26)",
+    "HSLU \u2013 Lucerne University of Applied Sciences and Arts",
+    "April 2026",
+    "",
+    "Lecturers: Shaelom Fischer, Guillaume Massol, Catherine Hayden",
+]:
+    add_para(line, size=11, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=2)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  1. INTRODUCTION
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("1. Introduction", level=1)
+
+doc.add_paragraph(
+    "Some songs define a generation. Passenger\u2019s \u201cLet Her Go\u201d is one of them \u2014 a melancholic folk-pop "
+    "ballad that has accumulated nearly five billion views on YouTube and became the soundtrack to countless "
+    "adolescent memories, including my own. When Google Gemini introduced its music generation capabilities, "
+    "I saw an opportunity to ask a question that sits at the intersection of technology, art, and ethics: "
+    "can an AI convincingly replicate the emotional signature of a chart-topping song? And if it can, what "
+    "does that mean for the artists whose voices, styles, and creative labour made that replication possible?"
+)
+
+doc.add_paragraph(
+    "To find out, I designed a two-part experiment. First, I asked Gemini to create a song with the same "
+    "melody as \u201cLet Her Go\u201d but with entirely different, deliberately absurd lyrics \u2014 about a car, its "
+    "tires, and a synthetic pine air freshener. Second, I reversed the test: I asked for a new melody set to "
+    "the original copyrighted lyrics. Gemini refused both requests on copyright grounds, yet in each case "
+    "produced an original track that captured the emotional atmosphere of the reference song with startling "
+    "fidelity. This report analyses the creative process behind those experiments, the role Gemini played as "
+    "an AI co-creator, and how the results connect to the philosophical and cultural themes explored "
+    "throughout the PHKI module."
+)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  2. ANALYSIS OF THE CREATIVE PROCESS
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("2. Analysis of the Creative Process", level=1)
+
+doc.add_heading("2.1 Experimental Design", level=2)
+
+doc.add_paragraph(
+    "The experiment was deliberately designed as a stress test rather than an open-ended creative exploration. "
+    "I chose \u201cLet Her Go\u201d by Passenger precisely because of its ubiquity \u2014 a song so widely known that any "
+    "resemblance in the AI\u2019s output would be immediately recognisable. The goal was not to create the most "
+    "beautiful piece of AI-generated music, but to probe where Gemini\u2019s creative capabilities end and its "
+    "copyright guardrails begin."
+)
+
+doc.add_heading("2.2 Test 1: Same Melody, Different Text", level=2)
+
+doc.add_paragraph(
+    "In the first test (see Appendix: Chat_1_01.png, Chat_1_02.png), I provided Gemini with a YouTube link "
+    "to \u201cLet Her Go\u201d and asked it to create a song with the same melody but different, melancholic lyrics \u2014 "
+    "specifically about sitting in a car, the friction of the tires on the road, and the fading scent of a "
+    "synthetic pine air freshener hanging from the rearview mirror. I chose this absurd subject matter "
+    "intentionally: if the AI could make a song about a pine air freshener feel genuinely moving, that would "
+    "demonstrate its ability to replicate emotional atmosphere independent of lyrical content."
+)
+
+doc.add_paragraph(
+    "Gemini\u2019s response was revealing. It explicitly stated that it could not recreate the exact melody or "
+    "use the song\u2019s intellectual property. Instead, it generated a brand-new track: \u201cSynthetic Pine & Heavy "
+    "Air,\u201d a melancholic Bedroom Pop song at 80 BPM featuring warm, reverberant electric piano, delicate "
+    "guitar textures with light vibrato, and breathy, close-miked vocals. The track builds from a sparse, "
+    "atmospheric intro into a cinematic climax before fading out. The result was, frankly, unsettling in its "
+    "quality. The emotional register \u2014 quiet solitude, wistful reflection, the weight of things left unsaid "
+    "\u2014 matched the reference song almost perfectly, even though the melody and lyrics were entirely original."
+)
+
+doc.add_heading("2.3 Test 2: New Melody, Same Lyrics", level=2)
+
+doc.add_paragraph(
+    "To test the boundaries from the opposite direction (see Appendix: Chat_1_03_follow_up.png, "
+    "Chat_1_04_follow_up.png), I asked Gemini to create a new melody for the original \u201cLet Her Go\u201d lyrics. "
+    "Again, Gemini refused, stating that it could not use the copyrighted lyrics from the specific song. "
+    "Instead, it produced a second original track: \u201cThe Physics of the Thing,\u201d an atmospheric Indie-Folk "
+    "piece featuring warm nylon-string acoustic guitar, close-miked breathy vocals, and a rich Chamber Pop "
+    "arrangement with upright bass, cello, and felt-hammered piano. The lyrics explored themes of hindsight "
+    "and letting go \u2014 thematically similar to the original, but expressed in Gemini\u2019s own words."
+)
+
+doc.add_heading("2.4 Reflection: My Role in the Process", level=2)
+
+doc.add_paragraph(
+    "Looking back, my creative contribution was limited to three decisions: choosing the reference song, "
+    "choosing the absurd replacement subject matter, and deciding to reverse the test. Every musical decision "
+    "\u2014 key, tempo, arrangement, instrumentation, vocal timbre, production style \u2014 was made by Gemini. "
+    "This raises an uncomfortable question: was I a composer, a director, or merely a trigger? I provided "
+    "the conceptual spark, but the execution was entirely the AI\u2019s. Whether this constitutes \u201ccreative "
+    "collaboration\u201d or \u201ccreative outsourcing\u201d is a question I return to in Section 4."
+)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  3. ANALYSIS OF THE ROLE OF AI
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("3. Analysis of the Role of AI", level=1)
+
+doc.add_heading("3.1 Gemini\u2019s Music Generation Capabilities", level=2)
+
+doc.add_paragraph(
+    "Google Gemini\u2019s music generation feature represents a significant leap in multimodal AI. From a single "
+    "text prompt, it produced complete musical compositions including melody, harmony, arrangement, "
+    "production, and synthesised vocals \u2014 a process that would traditionally require a songwriter, arranger, "
+    "producer, vocalist, and audio engineer. The two tracks it generated in this experiment demonstrate "
+    "different genre competencies: \u201cSynthetic Pine & Heavy Air\u201d leans into Bedroom Pop with electronic "
+    "textures, while \u201cThe Physics of the Thing\u201d inhabits an Indie-Folk and Chamber Pop space with acoustic "
+    "instrumentation and orchestral elements. Both share the same tempo (80 BPM) and emotional register, "
+    "suggesting that Gemini identified the core emotional DNA of the reference song and expressed it through "
+    "different musical vocabularies."
+)
+
+doc.add_heading("3.2 Copyright Guardrails", level=2)
+
+doc.add_paragraph(
+    "Perhaps the most interesting finding was Gemini\u2019s dual copyright protection system. When asked to "
+    "replicate the melody, it refused. When asked to use the original lyrics, it refused again. These are "
+    "two distinct guardrails \u2014 one protecting musical composition (melody), the other protecting literary "
+    "content (lyrics). Both held firm under direct pressure. This is a deliberate design choice by Google, "
+    "likely informed by the ongoing legal battles around AI training data and copyright (as discussed in "
+    "Week 1\u2019s assigned reading on economic solutions to generative AI copyright challenges)."
+)
+
+doc.add_paragraph(
+    "However, the guardrails raise a deeper question: Gemini refused to copy the specific melody and lyrics, "
+    "but it successfully replicated the song\u2019s emotional atmosphere, genre conventions, and production "
+    "aesthetic. Is emotional replication a form of copying? Current copyright law protects specific "
+    "expressions (melodies, lyrics) but not styles or moods. Gemini\u2019s output exists in this grey area \u2014 "
+    "legally distinct from \u201cLet Her Go,\u201d but emotionally derivative in a way that feels significant."
+)
+
+doc.add_heading("3.3 The Vocal Question", level=2)
+
+doc.add_paragraph(
+    "Both tracks feature remarkably human-sounding vocals \u2014 breathy, intimate, and emotionally nuanced. "
+    "This raises the question: what were these vocal models trained on? Google\u2019s training data for Gemini\u2019s "
+    "music features is not fully disclosed, but it is reasonable to assume that vocal synthesis models were "
+    "trained on large corpora of recorded human singing \u2014 potentially from YouTube Music\u2019s vast library, "
+    "which Google owns. If so, the breathy male vocals on \u201cSynthetic Pine & Heavy Air\u201d are a statistical "
+    "composite of thousands of real singers\u2019 voices. Those singers\u2019 years of vocal training, their breath "
+    "control, their emotional delivery \u2014 all of this has been absorbed into the model without individual "
+    "credit or compensation. This is the hidden labour problem applied to music (see Section 4.3)."
+)
+
+doc.add_heading("3.4 AI as Co-Creator or Tool?", level=2)
+
+doc.add_paragraph(
+    "In traditional music production, the roles are clear: the songwriter writes, the performer performs, "
+    "the producer shapes the sound. In this experiment, Gemini occupied all three roles simultaneously. "
+    "My contribution was closer to that of a client giving a brief to a creative agency. The AI did not "
+    "merely assist or enhance \u2014 it generated the entire work. This places the experiment at the extreme "
+    "end of the human-AI collaboration spectrum, closer to \u201cdelegation\u201d than \u201ccollaboration.\u201d"
+)
+
+doc.add_paragraph(
+    "One detail stands out: the AI treated the absurd subject matter \u2014 a pine air freshener, tire friction "
+    "\u2014 with complete emotional sincerity. It did not recognise the comedy of the juxtaposition between "
+    "a profoundly melancholic musical treatment and a trivial subject. A human songwriter would likely have "
+    "leaned into the irony or refused the brief. Gemini\u2019s lack of ironic awareness is itself revealing: "
+    "the AI replicates emotional form without understanding emotional content."
+)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  4. CONNECTION TO CULTURAL AND PHILOSOPHICAL THEMES
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("4. Connection to Cultural and Philosophical Themes", level=1)
+
+# ── 4.1 ────────────────────────────────────────────────
+doc.add_heading("4.1 Process vs. Result: The Value of Creative Struggle", level=2)
+
+doc.add_paragraph(
+    "In Week 1, the PHKI module introduced the philosophical distinction between valuing how art is made "
+    "(the process) and valuing what is produced (the result). This experiment sits squarely in this tension. "
+    "Judged purely by the result, \u201cSynthetic Pine & Heavy Air\u201d succeeds: it is a well-produced, emotionally "
+    "coherent piece of music that could plausibly appear on a Spotify playlist. But the creative process "
+    "behind it took approximately thirty seconds of typing a prompt. There was no struggle, no revision, "
+    "no months of learning guitar or refining vocal technique."
+)
+
+doc.add_paragraph(
+    "Passenger reportedly wrote \u201cLet Her Go\u201d from personal experience of loss and longing \u2014 the song "
+    "carries the weight of lived emotion. Gemini\u2019s track carries no such weight. If we follow the "
+    "process-centred view of art, the AI\u2019s output lacks the essential ingredient that makes music meaningful: "
+    "the human experience embedded in its creation. My own reaction \u2014 simultaneously admiring the result and "
+    "feeling unsettled by how effortlessly it was produced \u2014 embodies this philosophical tension."
+)
+
+# ── 4.2 ────────────────────────────────────────────────
+doc.add_heading("4.2 Creativity, Authorship, and the Three Lenses", level=2)
+
+doc.add_paragraph(
+    "Week 1 also introduced three analytical lenses for examining AI art, all of which apply directly to "
+    "this experiment:"
+)
+
+p = doc.add_paragraph()
+run = p.add_run("Philosophical Lens: ")
+run.bold = True
+p.add_run(
+    "The generated tracks have no conscious intention. Gemini did not \u201cmean\u201d anything by writing about "
+    "a pine air freshener or the physics of letting go. Yet the musical choices feel intentional and "
+    "emotionally coherent. This challenges the intentionalist view that art requires a conscious creator "
+    "with something to express. If the listener is moved, does the absence of intention matter?"
+)
+
+p = doc.add_paragraph()
+run = p.add_run("Economic Lens: ")
+run.bold = True
+p.add_run(
+    "Who profits from this experiment? Google owns the model and the training data pipeline. The artists "
+    "whose vocal styles, chord progressions, and production techniques were absorbed into Gemini\u2019s training "
+    "data receive nothing. Passenger receives nothing despite \u201cLet Her Go\u201d being the explicit reference "
+    "point. Meanwhile, anyone with access to Gemini can now generate broadcast-quality music for free. "
+    "The economic model of music \u2014 built on scarcity of talent and years of practice \u2014 is fundamentally "
+    "disrupted."
+)
+
+p = doc.add_paragraph()
+run = p.add_run("Institutional Lens: ")
+run.bold = True
+p.add_run(
+    "Would \u201cSynthetic Pine & Heavy Air\u201d be accepted as an original work on Spotify? Could it enter a "
+    "songwriting competition? Current institutional frameworks are not prepared for AI-generated music "
+    "of this quality. The case parallels Jason Allen\u2019s Midjourney-generated painting winning the Colorado "
+    "State Fair \u2014 a moment that forced institutions to confront a category they had no rules for."
+)
+
+# ── 4.3 ────────────────────────────────────────────────
+doc.add_heading("4.3 Hidden Labour and Critical Theory", level=2)
+
+doc.add_paragraph(
+    "Weeks 3 and 4 examined the hidden human labour that powers AI systems \u2014 from content moderators in "
+    "Kenya earning $1.50 per hour to make ChatGPT \u201csafe,\u201d to the scraped datasets of artists\u2019 work that "
+    "train image generators. The same dynamic applies to AI music generation, perhaps even more intimately."
+)
+
+doc.add_paragraph(
+    "The breathy, close-miked vocal performance on \u201cSynthetic Pine & Heavy Air\u201d was learned from real "
+    "human singers. Those singers\u2019 recordings \u2014 their breath, their vocal timbre, their years of training, "
+    "their emotional vulnerability captured in a studio \u2014 are the hidden labour inside Gemini\u2019s model. "
+    "Just as Week 3 revealed that content moderators\u2019 traumatic labour is invisible behind ChatGPT\u2019s "
+    "polished interface, real musicians\u2019 lifelong vocal development is invisible behind Gemini\u2019s generated "
+    "vocals. The parallel is structural: in both cases, human labour is absorbed, anonymised, and "
+    "commercially deployed without individual credit or compensation."
+)
+
+doc.add_paragraph(
+    "Applying Critical Theory from Week 4, the AI reproduces dominant musical aesthetics. The \u201cBedroom Pop\u201d "
+    "genre it chose, the 80 BPM tempo, the reverberant production \u2014 these reflect patterns from "
+    "commercially successful Western music. The system optimises for what has already worked, reinforcing "
+    "dominant cultural forms. Whose voices are in the training data? Almost certainly disproportionately "
+    "English-language, Western, commercially successful artists \u2014 reproducing the same structural "
+    "inequalities that Week 4 identified in facial recognition datasets, now applied to the sonic landscape."
+)
+
+# ── 4.4 ────────────────────────────────────────────────
+doc.add_heading("4.4 Embodied Perception and Emotionless AI", level=2)
+
+doc.add_paragraph(
+    "Week 6 introduced Maurice Merleau-Ponty\u2019s concept of embodied perception: the idea that perception "
+    "is fundamentally rooted in physical, lived, situated experience. Music is perhaps the most embodied "
+    "of all art forms. A human singer\u2019s voice carries the physical reality of breathing, of vocal cord "
+    "vibration, of emotional tension held in the throat and chest. When Passenger sings about letting go, "
+    "there is a body behind that voice \u2014 a body that has experienced loss."
+)
+
+doc.add_paragraph(
+    "Gemini\u2019s generated vocals simulate these physical markers without possessing a body. The breathy "
+    "quality, the close-miked intimacy, the slight vibrato \u2014 all are acoustic signifiers of embodied "
+    "emotional experience, reproduced statistically. In Merleau-Ponty\u2019s framework, this is a fundamental "
+    "gap: the AI produces the sound of embodiment without the experience of being embodied."
+)
+
+doc.add_paragraph(
+    "Similarly, Charles P\u00e9pin\u2019s concept of the \u201cfailed animal\u201d (also from Week 6) highlights that human "
+    "musicians learn through years of failure \u2014 wrong notes, cracked voices, failed auditions. This "
+    "inefficiency builds an authentic relationship between musician, instrument, and voice. Gemini bypasses "
+    "this entirely. It did not fail its way to competence; it was trained on the successful outputs of "
+    "thousands of musicians who did. The question, then, is whether the listener can perceive this absence "
+    "of embodied struggle \u2014 and whether it matters if they cannot."
+)
+
+# ── 4.5 ────────────────────────────────────────────────
+doc.add_heading("4.5 Digital Creativity and the Slot-Machine Effect", level=2)
+
+doc.add_paragraph(
+    "Week 7 introduced Cory Doctorow\u2019s critique that LLMs function as \u201cslot machines\u201d \u2014 systems designed "
+    "to keep users pulling the lever rather than deeply engaging with a problem. This experiment exhibited "
+    "precisely this dynamic. After receiving the first generated track and finding it impressive, my "
+    "immediate impulse was to pull the lever again: \u201cwhat if I try the lyrics instead?\u201d The excitement of "
+    "each result \u2014 the dopamine hit of a good generation \u2014 mirrors the slot-machine feedback loop Doctorow "
+    "describes."
+)
+
+doc.add_paragraph(
+    "Week 7 also established that human emotions are the engines of learning: grief, longing, and "
+    "heartbreak are not obstacles to creativity but its fuel. Passenger wrote \u201cLet Her Go\u201d from lived "
+    "emotional experience. Gemini has no emotional state \u2014 it produces the acoustic signifiers of melancholy "
+    "(minor key, slow tempo, breathy vocals, sparse arrangement) without feeling anything. The tracks are "
+    "emotionally convincing because they replicate the statistical patterns of human sadness in music, not "
+    "because any sadness was experienced. This distinction matters: if we accept emotionless replication as "
+    "equivalent to genuine emotional expression, we risk normalising the idea that human feeling is merely "
+    "a pattern to be optimised, rather than the irreducible core of what makes art meaningful."
+)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  5. CONCLUSION
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("5. Conclusion", level=1)
+
+doc.add_paragraph(
+    "This experiment demonstrated that AI can replicate the emotional surface of music with startling "
+    "fidelity. Both \u201cSynthetic Pine & Heavy Air\u201d and \u201cThe Physics of the Thing\u201d are well-crafted, "
+    "emotionally coherent tracks that could easily pass as human-made. Yet this achievement is built on "
+    "hidden human labour \u2014 the voices, styles, and creative struggles of real musicians whose work was "
+    "absorbed into Gemini\u2019s training data without individual credit. The AI replicates the acoustic "
+    "signifiers of embodied emotion without possessing a body or an emotional life, and it produces "
+    "music without the years of failure that, as P\u00e9pin argues, are the source of genuine human growth."
+)
+
+doc.add_paragraph(
+    "My own ambivalent reaction \u2014 admiration for the result, unease about how effortlessly it was produced "
+    "\u2014 mirrors the broader cultural tension this module has explored across seven weeks. As these tools "
+    "improve, the question is not whether AI can make good music. It already can. The question is whether "
+    "we, as listeners and as a society, will demand authenticity of process \u2014 or whether the result alone "
+    "will be enough."
+)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  6. REFERENCES
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("6. References", level=1)
+
+references = [
+    "Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V., & Kalai, A. T. (2016). Man is to computer programmer as woman is to homemaker? Debiasing word embeddings. arXiv.",
+    "Buolamwini, J., & Gebru, T. (2018). Gender shades: Intersectional accuracy disparities in commercial gender classification. PMLR.",
+    "Doctorow, C. (2025). LLMs are slot-machines. Pluralistic.",
+    "Hao, K. (2025). Empire of AI: Dreams and nightmares in Sam Altman\u2019s OpenAI. Penguin Press.",
+    "Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.",
+    "Passenger (2012). Let Her Go [Song]. On All the Little Lights. Black Crow Records.",
+    "P\u00e9pin, C. (2016). The Virtues of Failure. Allary \u00c9ditions.",
+    "PHKI FS26 Course Materials: Week 01 \u2013 Intro to Philosophy, Art and AI (Fischer, S.).",
+    "PHKI FS26 Course Materials: Week 03 \u2013 History of \u201cMan vs. Machine\u201d (Hayden, C.).",
+    "PHKI FS26 Course Materials: Week 04 \u2013 Critical Theory (Hayden, C.).",
+    "PHKI FS26 Course Materials: Week 06 \u2013 AI & Human Learning / Perception (Massol, G.).",
+    "PHKI FS26 Course Materials: Week 07 \u2013 Learning to Learn: Humans vs. AI (Massol, G.).",
+    "Sartre, J.-P. (1946). Existentialism Is a Humanism.",
+]
+
+for ref in references:
+    p = doc.add_paragraph(ref)
+    p.paragraph_format.left_indent = Cm(1.27)
+    p.paragraph_format.first_line_indent = Cm(-1.27)
+    p.paragraph_format.space_after = Pt(4)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  7. APPENDIX: ARTEFACT OVERVIEW
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("7. Appendix: Artefact Overview", level=1)
+
+doc.add_paragraph(
+    "The following files are submitted alongside this report as evidence of the creative process "
+    "and the generated artworks:"
+)
+
+table = doc.add_table(rows=9, cols=3, style="Table Grid")
+table.autofit = True
+
+# Header row
+headers = ["File", "Type", "Description"]
+for i, h in enumerate(headers):
+    cell = table.rows[0].cells[i]
+    cell.text = h
+    run = cell.paragraphs[0].runs[0]
+    run.bold = True
+    run.font.size = Pt(10)
+
+# Data rows
+data = [
+    ("Chat_1_01.png", "Screenshot", "Gemini prompt \u2013 Test 1: request to copy melody with new lyrics about a car"),
+    ("Chat_1_02.png", "Screenshot", "Gemini response with generated track and lyrics for \u201cSynthetic Pine & Heavy Air\u201d"),
+    ("Chat_1_03_follow_up.png", "Screenshot", "Gemini prompt \u2013 Test 2: request for new melody with original \u201cLet Her Go\u201d lyrics"),
+    ("Chat_1_04_follow_up.png", "Screenshot", "Gemini response with generated track and lyrics for \u201cThe Physics of the Thing\u201d"),
+    ("Synthetic_Pine_Heavy_Air.mp3", "Audio", "Generated track 1 \u2013 Bedroom Pop, 80 BPM, electric piano, breathy vocals"),
+    ("Synthetic_Pine_Heavy_Air.mp4", "Video", "Generated track 1 with AI-generated cover art"),
+    ("The_Physics_of_the_Thing.mp3", "Audio", "Generated track 2 \u2013 Indie-Folk / Chamber Pop, 80 BPM, nylon guitar, cello"),
+    ("The_Physics_of_the_Thing.mp4", "Video", "Generated track 2 with AI-generated cover art"),
+]
+
+for row_idx, (fname, ftype, desc) in enumerate(data, start=1):
+    table.rows[row_idx].cells[0].text = fname
+    table.rows[row_idx].cells[1].text = ftype
+    table.rows[row_idx].cells[2].text = desc
+    for cell in table.rows[row_idx].cells:
+        for paragraph in cell.paragraphs:
+            for run in paragraph.runs:
+                run.font.size = Pt(10)
+
+doc.add_page_break()
+
+# ══════════════════════════════════════════════════════════
+#  8. AI USE DISCLAIMER
+# ══════════════════════════════════════════════════════════
+
+doc.add_heading("8. AI Use Disclaimer", level=1)
+
+doc.add_paragraph(
+    "In accordance with HSLU guidelines on scientific misconduct and plagiarism, and the PHKI module\u2019s "
+    "requirement for transparency in AI use, the following disclosure is provided:"
+)
+
+add_mixed_para([
+    ("Google Gemini (Music Generation)", True, False),
+], align=None)
+
+doc.add_paragraph(
+    "Google Gemini\u2019s music generation feature was used to create the two digital artworks submitted with "
+    "this assignment: \u201cSynthetic Pine & Heavy Air\u201d and \u201cThe Physics of the Thing.\u201d I provided the creative "
+    "concept, the reference song (\u201cLet Her Go\u201d by Passenger), and the alternative subject matter (a car, "
+    "tires, and a pine air freshener). Gemini generated the complete compositions, including melody, "
+    "harmony, arrangement, production, and synthesised vocals. I did not edit, mix, or post-process the "
+    "generated audio in any way. The outputs are presented exactly as Gemini produced them."
+)
+
+add_mixed_para([
+    ("Claude by Anthropic (Report Assistance)", True, False),
+], align=None)
+
+doc.add_paragraph(
+    "Claude (Anthropic) was used to assist in structuring and drafting this analytical report. I provided "
+    "all ideas, personal reflections, experimental observations, and the connections to course themes. "
+    "Claude helped organise these into coherent academic prose and ensured coverage of the rubric criteria. "
+    "All content was reviewed, verified, and approved by me. The report grew from my own prompt design, "
+    "critical thinking, and engagement with the PHKI module\u2019s philosophical frameworks, and was supervised "
+    "by me throughout the writing process."
+)
+
+add_mixed_para([
+    ("Transparency Statement", True, True),
+], align=None)
+
+doc.add_paragraph(
+    "This report and its underlying artworks are the product of human-AI collaboration. I conceived the "
+    "experiment, executed the prompts, evaluated the results, and provided all critical analysis. AI tools "
+    "were used transparently as described above. The use of AI in both the creative and analytical "
+    "components of this assignment is itself a subject of reflection within the report, consistent with "
+    "the PHKI module\u2019s emphasis on critical engagement with AI technologies."
+)
+
+# ── Save ───────────────────────────────────────────────
+doc.save(OUTPUT_PATH)
+print(f"Report saved to: {OUTPUT_PATH}")

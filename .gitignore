@@ -8,3 +8,9 @@ _slides_extracted.txt
 # Ignore large binary assets (slides, zips, exemplars)
 *.pdf
 *.zip
+
+# Ignore old messy folder (replaced by Assignment_1_AI_Music_Generation/)
+Assignment one Music coping test gemini/
+
+# Claude Code internals
+.claude/
