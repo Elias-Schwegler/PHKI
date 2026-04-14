@@ -7,7 +7,10 @@ from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
+from lxml import etree
 import os
+import copy
 
 # ── Paths ──────────────────────────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +22,100 @@ DARK_GREY = RGBColor(0x40, 0x40, 0x40)
 BLACK = RGBColor(0x00, 0x00, 0x00)
 
 doc = Document()
+
+# ── Footnote Infrastructure ────────────────────────────
+# python-docx has no native footnote API, so we build it via XML.
+
+NSMAP = {
+    'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
+    'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+}
+
+_footnote_id = [0]  # mutable counter
+
+
+def _ensure_footnotes_part():
+    """Create the footnotes.xml part if it doesn't exist yet."""
+    from docx.opc.constants import RELATIONSHIP_TYPE as RT
+    from docx.opc.part import Part
+    from docx.opc.packuri import PackURI
+
+    part_name = PackURI('/word/footnotes.xml')
+    # Check if already exists
+    for rel in doc.part.rels.values():
+        try:
+            if rel.target_part.partname == part_name:
+                return rel.target_part
+        except (AttributeError, KeyError):
+            continue
+
+    # Create minimal footnotes.xml with separator footnotes (id 0 and 1)
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<w:footnotes xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"'
+        ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        '<w:footnote w:type="separator" w:id="0">'
+        '<w:p><w:r><w:separator/></w:r></w:p>'
+        '</w:footnote>'
+        '<w:footnote w:type="continuationSeparator" w:id="1">'
+        '<w:p><w:r><w:continuationSeparator/></w:r></w:p>'
+        '</w:footnote>'
+        '</w:footnotes>'
+    )
+    fn_part = Part(
+        part_name,
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml',
+        xml.encode('utf-8'),
+        doc.part.package,
+    )
+    doc.part.relate_to(fn_part, 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes')
+    return fn_part
+
+
+def add_footnote(paragraph, text):
+    """Add a footnote to the end of a paragraph with the given text."""
+    fn_part = _ensure_footnotes_part()
+    _footnote_id[0] += 2  # start at 2 (0 and 1 are separators)
+    fn_id = _footnote_id[0]
+
+    # 1. Add the footnote content to footnotes.xml
+    footnotes_elem = etree.fromstring(fn_part.blob)
+    fn_elem = etree.SubElement(footnotes_elem, qn('w:footnote'))
+    fn_elem.set(qn('w:id'), str(fn_id))
+
+    fn_p = etree.SubElement(fn_elem, qn('w:p'))
+    # Footnote ref run
+    fn_r1 = etree.SubElement(fn_p, qn('w:r'))
+    fn_rpr1 = etree.SubElement(fn_r1, qn('w:rPr'))
+    fn_style1 = etree.SubElement(fn_rpr1, qn('w:rStyle'))
+    fn_style1.set(qn('w:val'), 'FootnoteReference')
+    etree.SubElement(fn_r1, qn('w:footnoteRef'))
+    # Space
+    fn_r2 = etree.SubElement(fn_p, qn('w:r'))
+    fn_t2 = etree.SubElement(fn_r2, qn('w:t'))
+    fn_t2.text = ' ' + text
+    fn_t2.set(qn('xml:space'), 'preserve')
+    # Set footnote text size to 9pt
+    fn_rpr2 = etree.SubElement(fn_r2, qn('w:rPr'))
+    fn_sz = etree.SubElement(fn_rpr2, qn('w:sz'))
+    fn_sz.set(qn('w:val'), '18')  # half-points
+
+    fn_part._blob = etree.tostring(footnotes_elem, xml_declaration=True, encoding='UTF-8', standalone=True)
+
+    # 2. Add footnote reference in the paragraph
+    run = OxmlElement('w:r')
+    rpr = OxmlElement('w:rPr')
+    rstyle = OxmlElement('w:rStyle')
+    rstyle.set(qn('w:val'), 'FootnoteReference')
+    rpr.append(rstyle)
+    run.append(rpr)
+    fn_ref = OxmlElement('w:footnoteReference')
+    fn_ref.set(qn('w:id'), str(fn_id))
+    run.append(fn_ref)
+    paragraph._p.append(run)
+
+    return paragraph
+
 
 # ── Page Setup ─────────────────────────────────────────
 for section in doc.sections:
@@ -39,7 +136,7 @@ for level, size in [(1, 16), (2, 13), (3, 11)]:
     hs = doc.styles[f"Heading {level}"]
     hs.font.name = "Calibri"
     hs.font.size = Pt(size)
-    hs.font.color.rgb = NAVY
+    hs.font.color.rgb = BLACK
     hs.font.bold = True
     if level == 3:
         hs.font.italic = True
@@ -114,7 +211,7 @@ doc.add_page_break()
 
 doc.add_heading("1. Introduction", level=1)
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Some songs define a generation. Passenger\u2019s \u201cLet Her Go\u201d (Passenger, 2012) is one of them  - a "
     "melancholic folk-pop ballad that has accumulated nearly five billion views on YouTube and became the "
     "soundtrack to countless adolescent memories, including my own. When Google Gemini introduced its music "
@@ -123,6 +220,7 @@ doc.add_paragraph(
     "can an AI convincingly replicate the emotional signature of a chart-topping song? And if it can, what "
     "does that mean for the artists whose voices, styles, and creative labour made that replication possible?"
 )
+add_footnote(p, "Passenger (2012). Let Her Go [Song]. On All the Little Lights. Black Crow Records.")
 
 doc.add_paragraph(
     "To find out, I designed a two-part experiment. First, I asked Gemini to create a song with the same "
@@ -207,7 +305,7 @@ doc.add_heading("3. Analysis of the Role of AI", level=1)
 
 doc.add_heading("3.1 Gemini\u2019s Music Generation Capabilities", level=2)
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Google Gemini\u2019s music generation feature represents a significant leap in multimodal AI. The feature "
     "is powered by DeepMind\u2019s Lyria 3 model, which generates high-quality 44.1 kHz stereo audio from text "
     "prompts, delivering structural coherence including vocals, timed lyrics, and full instrumental "
@@ -215,6 +313,7 @@ doc.add_paragraph(
     "imperceptible watermark for identifying AI-generated content  - a technical transparency measure that "
     "contrasts with the opacity of the training data itself."
 )
+add_footnote(p, "Perez, S. (2026). Google adds music-generation capabilities to the Gemini app. TechCrunch.")
 
 doc.add_paragraph(
     "From a single text prompt, Lyria 3 produced complete musical compositions including melody, harmony, "
@@ -229,7 +328,7 @@ doc.add_paragraph(
 
 doc.add_heading("3.2 Copyright Guardrails", level=2)
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Perhaps the most interesting finding was Gemini\u2019s dual copyright protection system. When asked to "
     "replicate the melody, it refused. When asked to use the original lyrics, it refused again. These are "
     "two distinct guardrails  - one protecting musical composition (melody), the other protecting literary "
@@ -237,6 +336,8 @@ doc.add_paragraph(
     "likely informed by the ongoing legal battles around AI training data and copyright (cf. Georgetown "
     "GJIA, 2024; HULR, 2024)."
 )
+add_footnote(p, "Georgetown GJIA (2024). Innovation and Artists' Rights in the Age of Generative AI; "
+             "Harvard Undergraduate Law Review (2024). Defining Authorship for the Copyright of AI-Generated Music.")
 
 doc.add_paragraph(
     "However, the guardrails raise a deeper question: Gemini refused to copy the specific melody and lyrics, "
@@ -269,7 +370,7 @@ doc.add_paragraph(
     "end of the human-AI collaboration spectrum, closer to \u201cdelegation\u201d than \u201ccollaboration.\u201d"
 )
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "One detail stands out: the AI treated the absurd subject matter  - a pine air freshener, tire friction "
     " - with complete emotional sincerity. It did not recognise the comedy of the juxtaposition between "
     "a profoundly melancholic musical treatment and a trivial subject. A human songwriter would likely have "
@@ -281,6 +382,7 @@ doc.add_paragraph(
     "Gemini\u2019s music is technically polished but lacks the rough edges and idiosyncrasies that mark genuinely "
     "human creative work."
 )
+add_footnote(p, "PHKI FS26, Week 02: Human-AI Interaction & The Turing Test (Fischer, S.).")
 
 doc.add_page_break()
 
@@ -293,7 +395,7 @@ doc.add_heading("4. Connection to Cultural and Philosophical Themes", level=1)
 # ── 4.1 ────────────────────────────────────────────────
 doc.add_heading("4.1 Process vs. Result: The Value of Creative Struggle", level=2)
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "In Week 1, the PHKI module introduced the philosophical distinction between valuing how art is made "
     "(the process) and valuing what is produced (the result) (PHKI W1, Fischer, 2026). During the Gallery "
     "Walk, one of the ten works presented was Lucio Battisti\u2019s \u201cAmarsi un po\u2019\u201d (1977), which prompted "
@@ -307,8 +409,10 @@ doc.add_paragraph(
     "origin and history. AI music generation takes this a step further: it strips art not only of its aura "
     "but of its process entirely."
 )
+add_footnote(p, "Benjamin, W. (1935). The Work of Art in the Age of Mechanical Reproduction; "
+             "PHKI FS26, Week 01: Intro to Philosophy, Art and AI (Fischer, S.).")
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Passenger reportedly wrote \u201cLet Her Go\u201d from personal experience of loss and longing  - the song "
     "carries the weight of lived emotion. Gemini\u2019s track carries no such weight. If we follow the "
     "process-centred view of art, the AI\u2019s output lacks the essential ingredient that makes music meaningful: "
@@ -320,6 +424,7 @@ doc.add_paragraph(
     "simultaneously admiring the result and feeling unsettled by how effortlessly it was produced  - embodies "
     "this philosophical tension."
 )
+add_footnote(p, "Perception of AI-Generated Music: The Role of Composer Attribution (2025). arXiv:2512.02785.")
 
 # ── 4.2 ────────────────────────────────────────────────
 doc.add_heading("4.2 Creativity, Authorship, and the Three Lenses", level=2)
@@ -356,6 +461,7 @@ p.add_run(
     "consent. The economic model of music  - built on scarcity of talent and years of practice  - is "
     "fundamentally disrupted."
 )
+add_footnote(p, "Georgetown GJIA (2024). Innovation and Artists' Rights in the Age of Generative AI.")
 
 p = doc.add_paragraph()
 run = p.add_run("Institutional Lens: ")
@@ -368,6 +474,7 @@ p.add_run(
     "music of this quality. The case parallels Jason Allen\u2019s Midjourney-generated painting winning the "
     "Colorado State Fair  - a moment that forced institutions to confront a category they had no rules for."
 )
+add_footnote(p, "Harvard Undergraduate Law Review (2024). Defining Authorship for the Copyright of AI-Generated Music.")
 
 # ── 4.3 ────────────────────────────────────────────────
 doc.add_heading("4.3 Hidden Labour and Critical Theory", level=2)
@@ -378,6 +485,8 @@ doc.add_paragraph(
     "\u201csafe\u201d (Hao, 2025; Perrigo, 2022) to the scraped datasets of artists\u2019 work that train image "
     "generators. The same dynamic applies to AI music generation, perhaps even more intimately."
 )
+add_footnote(p, "Hao, K. (2025). Empire of AI. Penguin Press; "
+             "Perrigo, B. (2022). Inside Facebook's African Sweatshop. TIME.")
 
 doc.add_paragraph(
     "The breathy, close-miked vocal performance on \u201cSynthetic Pine & Heavy Air\u201d was learned from real "
@@ -401,6 +510,8 @@ doc.add_paragraph(
     "and traceability in AI-generated music, but as of today, no equivalent of the EU AI Act exists "
     "specifically for music  - leaving artists\u2019 vocal labour unprotected in a rapidly scaling industry."
 )
+add_footnote(p, "Buolamwini, J. & Gebru, T. (2018). Gender Shades. PMLR; "
+             "DAACI (2025). Ethical AI in Music Creation: A Framework for Copyright and Creative Innovation.")
 
 # ── 4.4 ────────────────────────────────────────────────
 doc.add_heading("4.4 Embodied Perception and Emotionless AI", level=2)
@@ -413,8 +524,9 @@ doc.add_paragraph(
     "vibration, of emotional tension held in the throat and chest. When Passenger sings about letting go, "
     "there is a body behind that voice  - a body that has experienced loss."
 )
+add_footnote(p, "Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.")
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Gemini\u2019s generated vocals simulate these physical markers without possessing a body. The breathy "
     "quality, the close-miked intimacy, the slight vibrato  - all are acoustic signifiers of embodied "
     "emotional experience, reproduced statistically. In Merleau-Ponty\u2019s framework, this is a fundamental "
@@ -426,8 +538,9 @@ doc.add_paragraph(
     "from technology "
     "while accepting less of it from each other  - a dynamic this experiment uncomfortably confirms."
 )
+add_footnote(p, "Turkle, S. (2011). Alone Together: Why We Expect More from Technology and Less from Each Other. Basic Books.")
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Similarly, P\u00e9pin\u2019s (2016) concept of the \u201cfailed animal\u201d (also from Week 6) highlights that human "
     "musicians learn through years of failure  - wrong notes, cracked voices, failed auditions. This "
     "inefficiency builds an authentic relationship between musician, instrument, and voice. Gemini bypasses "
@@ -435,11 +548,12 @@ doc.add_paragraph(
     "thousands of musicians who did. The question, then, is whether the listener can perceive this absence "
     "of embodied struggle  - and whether it matters if they cannot."
 )
+add_footnote(p, "P\u00e9pin, C. (2016). The Virtues of Failure. Allary \u00c9ditions.")
 
 # ── 4.5 ────────────────────────────────────────────────
 doc.add_heading("4.5 Digital Creativity and the Slot-Machine Effect", level=2)
 
-doc.add_paragraph(
+p = doc.add_paragraph(
     "Week 7 introduced Doctorow\u2019s (2025) critique that LLMs function as \u201cslot machines\u201d  - systems designed "
     "to keep users pulling the lever rather than deeply engaging with a problem. This experiment exhibited "
     "precisely this dynamic. After receiving the first generated track and finding it impressive, my "
@@ -448,7 +562,9 @@ doc.add_paragraph(
     "describes."
 )
 
-doc.add_paragraph(
+add_footnote(p, "Doctorow, C. (2025). LLMs are slot-machines. Pluralistic.")
+
+p = doc.add_paragraph(
     "Week 7 also established that human emotions are the engines of learning (PHKI W7, Massol, 2026): "
     "grief, longing, and "
     "heartbreak are not obstacles to creativity but its fuel. Passenger wrote \u201cLet Her Go\u201d from lived "
