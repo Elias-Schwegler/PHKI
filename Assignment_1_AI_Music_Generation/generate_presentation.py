@@ -153,7 +153,7 @@ add_textbox(slide, 0.8, 0.8, 11.7, 0.8,
 add_divider_line(slide, 0.8, 1.7, 3.0)
 
 add_textbox(slide, 0.8, 2.0, 5.5, 1.5,
-            "\u201cLet Her Go\u201d by Passenger \u2014 a song that defined a generation. "
+            "\u201cLet Her Go\u201d by Passenger  - a song that defined a generation. "
             "Nearly 5 billion YouTube views. A melody burned into collective memory.",
             font_size=17, color=LIGHT_GREY, line_spacing=1.4)
 
@@ -167,7 +167,7 @@ add_textbox(slide, 0.8, 4.4, 11.7, 1.0,
             font_size=22, color=WHITE, italic=True, line_spacing=1.4)
 
 add_textbox(slide, 0.8, 5.8, 11.7, 1.0,
-            "I designed a two-part stress test to find out \u2014 pushing Gemini\u2019s "
+            "I designed a two-part stress test to find out  - pushing Gemini\u2019s "
             "capabilities and copyright guardrails to their limits.",
             font_size=16, color=SUBTLE, line_spacing=1.4)
 
@@ -291,7 +291,7 @@ add_textbox(slide, 0.8, 4.5, 11.7, 0.5,
             font_size=20, color=ACCENT, bold=True, align=PP_ALIGN.CENTER)
 
 add_textbox(slide, 1.5, 5.2, 10.3, 1.5,
-            "Both guardrails held \u2014 yet both generated tracks successfully captured "
+            "Both guardrails held  - yet both generated tracks successfully captured "
             "the emotional atmosphere, genre feel, and melancholic vibe of the original. "
             "Gemini refused to copy the specific expression, but replicated the emotional essence.",
             font_size=18, color=WHITE, align=PP_ALIGN.CENTER, line_spacing=1.5)
@@ -312,19 +312,19 @@ add_divider_line(slide, 0.8, 1.7, 3.0)
 
 add_bullet_slide(slide, 0.8, 2.2, 11.7, 5.0, [
     ("Process vs. Result (W1):  ",
-     "A 30-second prompt vs. years of learning guitar. The result sounds professional \u2014 "
+     "A 30-second prompt vs. years of learning guitar. The result sounds professional  - "
      "but the creative struggle that gives music its depth was entirely absent."),
     ("Three Lenses (W1):  ",
-     "Philosophical \u2014 no conscious intention behind the music. "
-     "Economic \u2014 Google profits, training data artists receive nothing. "
-     "Institutional \u2014 would Spotify accept this as \u201coriginal\u201d?"),
+     "Philosophical  - no conscious intention behind the music. "
+     "Economic  - Google profits, training data artists receive nothing. "
+     "Institutional  - would Spotify accept this as \u201coriginal\u201d?"),
     ("Hidden Labour (W3, W4):  ",
-     "The breathy vocals were learned from real singers\u2019 recordings \u2014 their years of training, "
-     "their breath, their emotion \u2014 absorbed and anonymised. The same invisibility "
+     "The breathy vocals were learned from real singers\u2019 recordings  - their years of training, "
+     "their breath, their emotion  - absorbed and anonymised. The same invisibility "
      "as Sama\u2019s content moderators behind ChatGPT."),
     ("Embodied Perception (W6):  ",
      "Merleau-Ponty: music is fundamentally embodied. Gemini simulates the sound of a body "
-     "singing without possessing one. P\u00e9pin: human musicians learn through failure \u2014 Gemini "
+     "singing without possessing one. P\u00e9pin: human musicians learn through failure  - Gemini "
      "bypassed that entirely."),
 ], font_size=15, color=LIGHT_GREY)
 
@@ -350,7 +350,7 @@ add_textbox(slide, 0.8, 2.2, 11.7, 0.5,
 add_textbox(slide, 0.8, 2.8, 11.7, 1.2,
             "After the first impressive result, my instinct was to pull the lever again: \u201cwhat if I "
             "try the lyrics instead?\u201d The excitement of each generation mirrors the dopamine loop "
-            "Doctorow warns about. Was I creatively exploring \u2014 or gambling?",
+            "Doctorow warns about. Was I creatively exploring  - or gambling?",
             font_size=16, color=LIGHT_GREY, line_spacing=1.5)
 
 # Emotion
@@ -360,14 +360,14 @@ add_textbox(slide, 0.8, 4.3, 11.7, 0.5,
 
 add_textbox(slide, 0.8, 4.9, 11.7, 1.2,
             "Passenger wrote \u201cLet Her Go\u201d from lived grief and longing. Gemini produces the "
-            "acoustic markers of sadness \u2014 minor key, slow tempo, breathy vocals \u2014 without "
+            "acoustic markers of sadness  - minor key, slow tempo, breathy vocals  - without "
             "feeling anything. If we accept emotionless replication as equivalent to genuine "
             "expression, we risk reducing human feeling to a pattern to be optimised.",
             font_size=16, color=LIGHT_GREY, line_spacing=1.5)
 
 # Vocal training
 add_textbox(slide, 0.8, 6.3, 11.7, 0.8,
-            "Whose voices trained the model? Likely YouTube Music\u2019s library \u2014 commercially successful, "
+            "Whose voices trained the model? Likely YouTube Music\u2019s library  - commercially successful, "
             "English-language, Western artists. The same structural bias as W4\u2019s facial recognition datasets.",
             font_size=14, color=SUBTLE, italic=True, line_spacing=1.4)
 
@@ -401,7 +401,7 @@ add_textbox(slide, 1.2, 5.3, 10.9, 1.0,
 
 add_textbox(slide, 1.2, 6.0, 10.9, 1.0,
             "The question is whether we, as listeners and as a society, "
-            "will demand authenticity of process \u2014 or whether the result alone will be enough.",
+            "will demand authenticity of process  - or whether the result alone will be enough.",
             font_size=17, color=LIGHT_GREY, italic=True, line_spacing=1.5)
 
 # ══════════════════════════════════════════════════════════
