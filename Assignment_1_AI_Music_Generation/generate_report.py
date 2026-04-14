@@ -207,15 +207,23 @@ doc.add_heading("3. Analysis of the Role of AI", level=1)
 doc.add_heading("3.1 Gemini\u2019s Music Generation Capabilities", level=2)
 
 doc.add_paragraph(
-    "Google Gemini\u2019s music generation feature represents a significant leap in multimodal AI. From a single "
-    "text prompt, it produced complete musical compositions including melody, harmony, arrangement, "
-    "production, and synthesised vocals \u2014 a process that would traditionally require a songwriter, arranger, "
-    "producer, vocalist, and audio engineer. The two tracks it generated in this experiment demonstrate "
-    "different genre competencies: \u201cSynthetic Pine & Heavy Air\u201d leans into Bedroom Pop with electronic "
-    "textures, while \u201cThe Physics of the Thing\u201d inhabits an Indie-Folk and Chamber Pop space with acoustic "
-    "instrumentation and orchestral elements. Both share the same tempo (80 BPM) and emotional register, "
-    "suggesting that Gemini identified the core emotional DNA of the reference song and expressed it through "
-    "different musical vocabularies."
+    "Google Gemini\u2019s music generation feature represents a significant leap in multimodal AI. The feature "
+    "is powered by DeepMind\u2019s Lyria 3 model, which generates high-quality 44.1 kHz stereo audio from text "
+    "prompts, delivering structural coherence including vocals, timed lyrics, and full instrumental "
+    "arrangements (TechCrunch, 2026). Notably, all Gemini-generated tracks are embedded with SynthID, an "
+    "imperceptible watermark for identifying AI-generated content \u2014 a technical transparency measure that "
+    "contrasts with the opacity of the training data itself."
+)
+
+doc.add_paragraph(
+    "From a single text prompt, Lyria 3 produced complete musical compositions including melody, harmony, "
+    "arrangement, production, and synthesised vocals \u2014 a process that would traditionally require a "
+    "songwriter, arranger, producer, vocalist, and audio engineer. The two tracks it generated in this "
+    "experiment demonstrate different genre competencies: \u201cSynthetic Pine & Heavy Air\u201d leans into Bedroom "
+    "Pop with electronic textures, while \u201cThe Physics of the Thing\u201d inhabits an Indie-Folk and Chamber Pop "
+    "space with acoustic instrumentation and orchestral elements. Both share the same tempo (80 BPM) and "
+    "emotional register, suggesting that Gemini identified the core emotional DNA of the reference song and "
+    "expressed it through different musical vocabularies."
 )
 
 doc.add_heading("3.2 Copyright Guardrails", level=2)
@@ -265,7 +273,11 @@ doc.add_paragraph(
     "\u2014 with complete emotional sincerity. It did not recognise the comedy of the juxtaposition between "
     "a profoundly melancholic musical treatment and a trivial subject. A human songwriter would likely have "
     "leaned into the irony or refused the brief. Gemini\u2019s lack of ironic awareness is itself revealing: "
-    "the AI replicates emotional form without understanding emotional content."
+    "the AI replicates emotional form without understanding emotional content. This parallels a pattern "
+    "observed during the Week 2 Turing Game exercise, where students found that AI-generated responses were "
+    "consistently \u201cgeneric, structurally clean, and neat,\u201d while human responses were \u201cspecific, imperfect, "
+    "and emotionally textured.\u201d The same distinction applies here: Gemini\u2019s music is technically polished "
+    "but lacks the rough edges and idiosyncrasies that mark genuinely human creative work."
 )
 
 doc.add_page_break()
@@ -281,19 +293,28 @@ doc.add_heading("4.1 Process vs. Result: The Value of Creative Struggle", level=
 
 doc.add_paragraph(
     "In Week 1, the PHKI module introduced the philosophical distinction between valuing how art is made "
-    "(the process) and valuing what is produced (the result). This experiment sits squarely in this tension. "
-    "Judged purely by the result, \u201cSynthetic Pine & Heavy Air\u201d succeeds: it is a well-produced, emotionally "
-    "coherent piece of music that could plausibly appear on a Spotify playlist. But the creative process "
-    "behind it took approximately thirty seconds of typing a prompt. There was no struggle, no revision, "
-    "no months of learning guitar or refining vocal technique."
+    "(the process) and valuing what is produced (the result). During the Gallery Walk, one of the ten works "
+    "presented was Lucio Battisti\u2019s \u201cAmarsi un po\u2019\u201d (1977), which prompted the class to ask: \u201cCan AI "
+    "compose with equal emotional depth?\u201d My experiment with Gemini provides a concrete answer to that "
+    "question \u2014 or rather, it complicates it. Judged purely by the result, \u201cSynthetic Pine & Heavy Air\u201d "
+    "succeeds: it is a well-produced, emotionally coherent piece of music that could plausibly appear on a "
+    "Spotify playlist. But the creative process behind it took approximately thirty seconds of typing a "
+    "prompt. There was no struggle, no revision, no months of learning guitar or refining vocal technique. "
+    "As Walter Benjamin argued in The Work of Art in the Age of Mechanical Reproduction (1935), technology "
+    "strips art of its \u201caura\u201d \u2014 the unique presence tied to its origin and history. AI music generation "
+    "takes this a step further: it strips art not only of its aura but of its process entirely."
 )
 
 doc.add_paragraph(
     "Passenger reportedly wrote \u201cLet Her Go\u201d from personal experience of loss and longing \u2014 the song "
     "carries the weight of lived emotion. Gemini\u2019s track carries no such weight. If we follow the "
     "process-centred view of art, the AI\u2019s output lacks the essential ingredient that makes music meaningful: "
-    "the human experience embedded in its creation. My own reaction \u2014 simultaneously admiring the result and "
-    "feeling unsettled by how effortlessly it was produced \u2014 embodies this philosophical tension."
+    "the human experience embedded in its creation. Recent empirical research supports this intuition: a "
+    "study on the perception of AI-generated music found that listeners rated identical piano performances "
+    "more positively when they believed the performer was human, revealing a significant \u201cauthorship bias\u201d "
+    "(arXiv:2512.02785). People do not just hear music \u2014 they sense the mind behind it. My own reaction \u2014 "
+    "simultaneously admiring the result and feeling unsettled by how effortlessly it was produced \u2014 embodies "
+    "this philosophical tension."
 )
 
 # ── 4.2 ────────────────────────────────────────────────
@@ -301,7 +322,11 @@ doc.add_heading("4.2 Creativity, Authorship, and the Three Lenses", level=2)
 
 doc.add_paragraph(
     "Week 1 also introduced three analytical lenses for examining AI art, all of which apply directly to "
-    "this experiment:"
+    "this experiment. In the Opinion Spectrum exercise, two statements proved especially relevant: "
+    "\u201cAI art can evoke genuine human emotions\u201d (Statement 4) and \u201cThe future of art will be AI-human "
+    "collaboration, not replacement\u201d (Statement 8). My experiment complicates both: the generated tracks "
+    "do evoke genuine emotion, but the collaboration was so one-sided that \u201creplacement\u201d may be the more "
+    "accurate term."
 )
 
 p = doc.add_paragraph()
@@ -321,9 +346,11 @@ p.add_run(
     "Who profits from this experiment? Google owns the model and the training data pipeline. The artists "
     "whose vocal styles, chord progressions, and production techniques were absorbed into Gemini\u2019s training "
     "data receive nothing. Passenger receives nothing despite \u201cLet Her Go\u201d being the explicit reference "
-    "point. Meanwhile, anyone with access to Gemini can now generate broadcast-quality music for free. "
-    "The economic model of music \u2014 built on scarcity of talent and years of practice \u2014 is fundamentally "
-    "disrupted."
+    "point. This is not a hypothetical concern: in 2024, Universal, Sony, and Warner filed lawsuits against "
+    "AI music platforms Suno and Udio for training on copyrighted recordings without permission (Georgetown "
+    "GJIA, 2024). Tennessee\u2019s ELVIS Act (2024) now prohibits AI cloning of an artist\u2019s voice without "
+    "consent. The economic model of music \u2014 built on scarcity of talent and years of practice \u2014 is "
+    "fundamentally disrupted."
 )
 
 p = doc.add_paragraph()
@@ -331,9 +358,11 @@ run = p.add_run("Institutional Lens: ")
 run.bold = True
 p.add_run(
     "Would \u201cSynthetic Pine & Heavy Air\u201d be accepted as an original work on Spotify? Could it enter a "
-    "songwriting competition? Current institutional frameworks are not prepared for AI-generated music "
-    "of this quality. The case parallels Jason Allen\u2019s Midjourney-generated painting winning the Colorado "
-    "State Fair \u2014 a moment that forced institutions to confront a category they had no rules for."
+    "songwriting competition? In Thaler v. Perlmutter (2023), the court ruled that copyright protection "
+    "requires human authorship \u2014 works generated entirely by AI cannot be copyrighted (Harvard "
+    "Undergraduate Law Review, 2024). Current institutional frameworks are not prepared for AI-generated "
+    "music of this quality. The case parallels Jason Allen\u2019s Midjourney-generated painting winning the "
+    "Colorado State Fair \u2014 a moment that forced institutions to confront a category they had no rules for."
 )
 
 # ── 4.3 ────────────────────────────────────────────────
@@ -361,7 +390,10 @@ doc.add_paragraph(
     "commercially successful Western music. The system optimises for what has already worked, reinforcing "
     "dominant cultural forms. Whose voices are in the training data? Almost certainly disproportionately "
     "English-language, Western, commercially successful artists \u2014 reproducing the same structural "
-    "inequalities that Week 4 identified in facial recognition datasets, now applied to the sonic landscape."
+    "inequalities that Week 4 identified in facial recognition datasets, now applied to the sonic landscape. "
+    "The DAACI White Paper on Ethical AI in Music Creation (2025) has proposed a framework for copyright "
+    "and traceability in AI-generated music, but as of today, no equivalent of the EU AI Act exists "
+    "specifically for music \u2014 leaving artists\u2019 vocal labour unprotected in a rapidly scaling industry."
 )
 
 # ── 4.4 ────────────────────────────────────────────────
@@ -379,7 +411,12 @@ doc.add_paragraph(
     "Gemini\u2019s generated vocals simulate these physical markers without possessing a body. The breathy "
     "quality, the close-miked intimacy, the slight vibrato \u2014 all are acoustic signifiers of embodied "
     "emotional experience, reproduced statistically. In Merleau-Ponty\u2019s framework, this is a fundamental "
-    "gap: the AI produces the sound of embodiment without the experience of being embodied."
+    "gap: the AI produces the sound of embodiment without the experience of being embodied. The Week 6 "
+    "\u201cData vs. Experience\u201d sorting exercise made this distinction vivid: the class differentiated between "
+    "\u201cdetecting sadness in a voice\u201d (something AI can do) and \u201cfeeling sad because of the tone\u201d (something "
+    "only an embodied listener experiences). Gemini\u2019s music operates entirely in the first category. As "
+    "Sherry Turkle argues in Alone Together (2011), we increasingly expect emotional depth from technology "
+    "while accepting less of it from each other \u2014 a dynamic this experiment uncomfortably confirms."
 )
 
 doc.add_paragraph(
@@ -449,19 +486,27 @@ doc.add_page_break()
 doc.add_heading("6. References", level=1)
 
 references = [
+    "Benjamin, W. (1935). The Work of Art in the Age of Mechanical Reproduction.",
     "Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V., & Kalai, A. T. (2016). Man is to computer programmer as woman is to homemaker? Debiasing word embeddings. arXiv.",
     "Buolamwini, J., & Gebru, T. (2018). Gender shades: Intersectional accuracy disparities in commercial gender classification. PMLR.",
-    "Doctorow, C. (2025). LLMs are slot-machines. Pluralistic.",
+    "DAACI (2025). Ethical AI in Music Creation: A Framework for Copyright and Creative Innovation. White Paper, March 2025.",
+    "Doctorow, C. (2025). LLMs are slot-machines. Pluralistic. https://pluralistic.net/2025/08/16/jackpot/",
+    "Georgetown Journal of International Affairs (2024). Innovation and Artists\u2019 Rights in the Age of Generative AI. https://gjia.georgetown.edu/2024/07/10/innovation-and-artists-rights-in-the-age-of-generative-ai/",
     "Hao, K. (2025). Empire of AI: Dreams and nightmares in Sam Altman\u2019s OpenAI. Penguin Press.",
+    "Harvard Undergraduate Law Review (2024). Defining Authorship for the Copyright of AI-Generated Music. https://hulr.org/fall-2024/defining-authorship-for-the-copyright-of-ai-generated-music",
     "Merleau-Ponty, M. (1945). Phenomenology of Perception. Gallimard.",
     "Passenger (2012). Let Her Go [Song]. On All the Little Lights. Black Crow Records.",
     "P\u00e9pin, C. (2016). The Virtues of Failure. Allary \u00c9ditions.",
+    "Perception of AI-Generated Music: The Role of Composer Attribution (2025). arXiv:2512.02785.",
     "PHKI FS26 Course Materials: Week 01 \u2013 Intro to Philosophy, Art and AI (Fischer, S.).",
+    "PHKI FS26 Course Materials: Week 02 \u2013 Human-AI Interaction & The Turing Test (Fischer, S.).",
     "PHKI FS26 Course Materials: Week 03 \u2013 History of \u201cMan vs. Machine\u201d (Hayden, C.).",
     "PHKI FS26 Course Materials: Week 04 \u2013 Critical Theory (Hayden, C.).",
     "PHKI FS26 Course Materials: Week 06 \u2013 AI & Human Learning / Perception (Massol, G.).",
     "PHKI FS26 Course Materials: Week 07 \u2013 Learning to Learn: Humans vs. AI (Massol, G.).",
     "Sartre, J.-P. (1946). Existentialism Is a Humanism.",
+    "TechCrunch (2026). Google adds music-generation capabilities to the Gemini app. https://techcrunch.com/2026/02/18/google-adds-music-generation-capabilities-to-the-gemini-app/",
+    "Turkle, S. (2011). Alone Together: Why We Expect More from Technology and Less from Each Other. Basic Books.",
 ]
 
 for ref in references:

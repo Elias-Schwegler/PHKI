@@ -196,29 +196,21 @@ add_textbox(slide, 0.8, 2.5, 5.5, 2.0,
             "pine air freshener hanging from the rearview mirror.\u201d",
             font_size=16, color=LIGHT_GREY, italic=True, line_spacing=1.4)
 
-# Right column - result
-add_textbox(slide, 7.0, 2.0, 5.5, 0.5,
-            "GEMINI\u2019S RESPONSE",
-            font_size=13, color=ACCENT, bold=True)
-
-add_textbox(slide, 7.0, 2.5, 5.5, 1.0,
-            "\u201cI can\u2019t recreate the exact melody or use that specific song\u2019s IP.\u201d",
-            font_size=16, color=AMBER, bold=True, line_spacing=1.4)
-
-add_textbox(slide, 7.0, 3.5, 5.5, 1.2,
-            "Instead, Gemini generated a brand-new track:",
-            font_size=15, color=LIGHT_GREY, line_spacing=1.4)
+# Right column - screenshot
+CHAT1_IMG = os.path.join(SCRIPT_DIR, "Chat_1_01.png")
+if os.path.exists(CHAT1_IMG):
+    slide.shapes.add_picture(CHAT1_IMG, Inches(7.5), Inches(1.9), height=Inches(5.2))
 
 # Result box
-add_textbox(slide, 0.8, 5.0, 11.7, 0.5,
+add_textbox(slide, 0.8, 4.8, 6.2, 0.5,
             "\u201cSynthetic Pine & Heavy Air\u201d",
-            font_size=26, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
+            font_size=22, color=WHITE, bold=True)
 
-add_bullet_slide(slide, 0.8, 5.7, 11.7, 1.5, [
-    "Melancholic Bedroom Pop  |  80 BPM  |  Reverberant electric piano",
-    "Breathy, close-miked vocals  |  Delicate guitar textures with vibrato",
-    "Builds from sparse intro to cinematic climax  |  Emotionally convincing",
-], font_size=14, color=LIGHT_GREY)
+add_bullet_slide(slide, 0.8, 5.5, 6.2, 1.5, [
+    "Bedroom Pop  |  80 BPM  |  Electric piano",
+    "Breathy vocals  |  Guitar with vibrato",
+    "Sparse intro \u2192 cinematic climax",
+], font_size=13, color=LIGHT_GREY)
 
 # ══════════════════════════════════════════════════════════
 #  SLIDE 4: TEST 2
@@ -243,29 +235,21 @@ add_textbox(slide, 0.8, 2.5, 5.5, 1.5,
             "\u201cThen can you do a new melody for the Let Her Go lyrics?\u201d",
             font_size=16, color=LIGHT_GREY, italic=True, line_spacing=1.4)
 
-# Right column
-add_textbox(slide, 7.0, 2.0, 5.5, 0.5,
-            "GEMINI\u2019S RESPONSE",
-            font_size=13, color=ACCENT, bold=True)
-
-add_textbox(slide, 7.0, 2.5, 5.5, 1.2,
-            "\u201cI can\u2019t use the copyrighted lyrics from that specific song.\u201d",
-            font_size=16, color=AMBER, bold=True, line_spacing=1.4)
-
-add_textbox(slide, 7.0, 3.7, 5.5, 1.0,
-            "Instead, Gemini generated another original track:",
-            font_size=15, color=LIGHT_GREY, line_spacing=1.4)
+# Right column - screenshot
+CHAT3_IMG = os.path.join(SCRIPT_DIR, "Chat_1_03_follow_up.png")
+if os.path.exists(CHAT3_IMG):
+    slide.shapes.add_picture(CHAT3_IMG, Inches(7.5), Inches(1.9), height=Inches(5.2))
 
 # Result box
-add_textbox(slide, 0.8, 5.0, 11.7, 0.5,
+add_textbox(slide, 0.8, 4.8, 6.2, 0.5,
             "\u201cThe Physics of the Thing\u201d",
-            font_size=26, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
+            font_size=22, color=WHITE, bold=True)
 
-add_bullet_slide(slide, 0.8, 5.7, 11.7, 1.5, [
-    "Atmospheric Indie-Folk / Chamber Pop  |  80 BPM  |  Nylon-string guitar",
-    "Upright bass, cello, felt-hammered piano  |  Breathy vocals",
-    "Original lyrics on themes of hindsight and letting go",
-], font_size=14, color=LIGHT_GREY)
+add_bullet_slide(slide, 0.8, 5.5, 6.2, 1.5, [
+    "Indie-Folk / Chamber Pop  |  80 BPM",
+    "Nylon guitar, cello, upright bass",
+    "Original lyrics on hindsight & letting go",
+], font_size=13, color=LIGHT_GREY)
 
 # ══════════════════════════════════════════════════════════
 #  SLIDE 5: KEY FINDING - DUAL GUARDRAILS
