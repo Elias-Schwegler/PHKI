@@ -12,12 +12,12 @@ import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_PATH = os.path.join(SCRIPT_DIR, "PHKI_Assignment1_Presentation.pptx")
 
-NAVY = RGBColor(0x1F, 0x39, 0x64)
-WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-LIGHT_GREY = RGBColor(0xF2, 0xF2, 0xF2)
-ACCENT = RGBColor(0x4A, 0x90, 0xD9)
-SUBTLE = RGBColor(0x66, 0x66, 0x66)
-AMBER = RGBColor(0xD4, 0x8B, 0x2C)
+DARK_BG = RGBColor(0x1A, 0x2A, 0x1A)       # deep forest green background
+WHITE = RGBColor(0xF5, 0xF5, 0xF0)         # warm off-white
+LIGHT_GREY = RGBColor(0xD4, 0xD9, 0xCE)    # sage-tinted grey for body text
+ACCENT = RGBColor(0x6B, 0xB5, 0x6A)        # fresh leaf green for highlights
+SUBTLE = RGBColor(0x7A, 0x8A, 0x72)        # muted olive for small text
+AMBER = RGBColor(0xE8, 0xA8, 0x3E)         # warm amber for warnings/refusals
 
 prs = Presentation()
 prs.slide_width = Inches(13.333)
@@ -28,7 +28,7 @@ def add_bg(slide):
     bg = slide.background
     fill = bg.fill
     fill.solid()
-    fill.fore_color.rgb = NAVY
+    fill.fore_color.rgb = DARK_BG
 
 
 def tb(slide, left, top, width, height, text, size=18,
